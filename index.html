@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nombre de la pagina — Tienda</title>
+  <meta name="description" content="Formaciones, asesorías y recursos." />
+  <style>
+    :root{
+      --bg:#000; 
+      --bg2:#0b0b0b; 
+      --text:#f5f5f5; 
+      --muted:#aaaaaa; 
+      --brand:#e50914; 
+      --card:#400707; 
+      --card-2:#141414; 
+      --shadow:0 10px 30px rgba(0,0,0,.45);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Roboto,Arial,sans-serif;line-height:1.45}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.9);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;gap:16px}
+    .brand{font-weight:800;letter-spacing:.2px;color:var(--brand)}
+    .pill{padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid rgba(255,255,255,.1)}
+    .spacer{flex:1}
+    .nav a{padding:10px 12px;border-radius:10px;color:var(--text)}
+    .nav a:hover{color:var(--brand)}
+    .cta{background:var(--brand);color:#fff;font-weight:800;padding:10px 14px;border-radius:12px;transition:.2s}
+    .cta:hover{background:#ff1a1a}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .hero h1{font-size:clamp(28px,4vw,46px);line-height:1.05;margin:10px 0}
+    .lead{color:var(--muted);font-size:clamp(14px,2.2vw,18px)}
+    .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* GRID */
+    .grid{display:grid;gap:18px}
+    @media (min-width:560px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .prod{display:flex;flex-direction:column;overflow:hidden}
+    .prod img{aspect-ratio:16/10;object-fit:cover}
+    .prod .body{padding:14px 14px 16px}
+    .prod h3{margin:4px 0 6px;font-size:18px}
+    .price{display:flex;align-items:center;gap:10px;margin-top:6px}
+    .now{font-weight:900;color:var(--brand)}
+    .old{color:#777;text-decoration:line-through}
+    .button{margin-top:12px;display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;border:none;cursor:pointer;transition:.2s}
+    .button:hover{background:#ff1a1a}
+    .button.secondary{background:#202020;color:#eee;border:1px solid rgba(255,255,255,.15)}
+    .button.secondary:hover{border-color:var(--brand);color:var(--brand)}
+
+    .section-title{display:flex;align-items:end;justify-content:space-between;margin:26px 0 12px}
+    .section-title h2{margin:0;font-size:24px;color:var(--brand)}
+
+    /* TESTIMONIOS */
+    .t-grid{display:grid;gap:16px}
+    @media (min-width:720px){.t-grid{grid-template-columns:repeat(3,1fr)}}
+    .t-card{padding:0;border-radius:12px;overflow:hidden}
+
+    /* CONTACTO */
+    .contact{display:grid;gap:22px}
+    .list{margin:0;padding-left:18px;color:var(--muted)}
+
+    /* MODAL */
+    .modal-wrap{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);z-index:100}
+    .modal{width:min(900px,92vw);max-height:92vh;overflow:auto}
+    .modal header{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;justify-content:space-between}
+    .x{background:transparent;border:0;color:var(--muted);font-size:22px;cursor:pointer}
+    .modal-body{display:grid;gap:18px;padding:18px}
+    @media (min-width:850px){.modal-body{grid-template-columns:1.2fr .8fr}}
+    .faq details{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;background:#0f0f0f}
+    .faq summary{cursor:pointer;font-weight:800;color:var(--brand)}
+    .muted{color:var(--muted)}
+
+    footer{padding:28px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:40px;text-align:center}
+    @media (max-width:820px){.hero{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Delirio Espiritual</div>
+      <span class="pill">Inicio</span>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+      <div class="spacer"></div>
+      <a class="cta" id="cta-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </nav>
+
+  <section class="container hero">
+    <div>
+      <h1>Formaciones y asesorías para construir una marca con propósito</h1>
+      <p class="lead">Cursos, e-books y mentorías enfocadas en estrategia, comunicación y crecimiento.</p>
+      <div class="payrow" aria-label="Medios de pago">
+        <span class="muted">Aceptamos todas las tarjetas y criptomonedas.</span>
+      </div>
+    </div>
+    <div class="card">
+      <img alt="Portada" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop" />
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-title"><h2>Productos</h2><span class="muted">Seleccioná para ver detalles</span></div>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section id="testimonios" class="container">
+    <div class="section-title"><h2>Testimonios</h2><span class="muted">Experiencias reales</span></div>
+    <div id="tgrid" class="t-grid">
+    <!-- Testimonio tipo carrusel (con zoom modal al hacer click) -->
+<article class="card t-card" style="position: relative; overflow: hidden; border-radius: 12px; background: #000;">
+  <div class="slider-container" style="position: relative; height: 100%;">
+    <button class="arrow left" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:#fff;border:none;font-size:24px;padding:6px;border-radius:50%;cursor:pointer;z-index:2;">‹</button>
+    <div class="slider" style="display:flex;transition:transform 0.5s ease;height:100%;">
+      <div class="slide" style="min-width:100%;display:flex;justify-content:center;align-items:center;background:#000;">
+        <img src="carrusel1.jpg" style="width:100%;height:100%;object-fit:contain;border-radius:12px;cursor:pointer;" alt="">
+      </div>
+      <div class="slide" style="min-width:100%;display:flex;justify-content:center;align-items:center;background:#000;">
+        <img src="carrusel2.jpg" style="width:100%;height:100%;object-fit:contain;border-radius:12px;cursor:pointer;" alt="">
+      </div>
+      <div class="slide" style="min-width:100%;display:flex;justify-content:center;align-items:center;background:#000;">
+        <img src="carrusel3.jpg" style="width:100%;height:100%;object-fit:contain;border-radius:12px;cursor:pointer;" alt="">
+      </div>
+      <div class="slide" style="min-width:100%;display:flex;justify-content:center;align-items:center;background:#000;">
+        <img src="carrusel4.jpg" style="width:100%;height:100%;object-fit:contain;border-radius:12px;cursor:pointer;" alt="">
+      </div>
+      <div class="slide" style="min-width:100%;display:flex;justify-content:center;align-items:center;background:#000;">
+        <img src="carrusel5.jpg" style="width:100%;height:100%;object-fit:contain;border-radius:12px;cursor:pointer;" alt="">
+      </div>
+    </div>
+    <button class="arrow right" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:#fff;border:none;font-size:24px;padding:6px;border-radius:50%;cursor:pointer;z-index:2;">›</button>
+    <div class="dots" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2;"></div>
+  </div>
+
+  <!-- Modal de imagen -->
+  <div class="img-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:9999;">
+    <img src="" alt="Imagen ampliada" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 20px rgba(0,0,0,0.5);">
+    <button class="close-btn" style="position:absolute;top:20px;right:30px;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;">✕</button>
+  </div>
+
+  <script>
+    (function(){
+      const article = document.currentScript.closest("article");
+      const slider = article.querySelector(".slider");
+      const slides = slider.querySelectorAll(".slide");
+      const dotsBox = article.querySelector(".dots");
+      const prevBtn = article.querySelector(".arrow.left");
+      const nextBtn = article.querySelector(".arrow.right");
+      const modal = article.querySelector(".img-modal");
+      const modalImg = modal.querySelector("img");
+      const closeBtn = modal.querySelector(".close-btn");
+
+      let index = 0;
+
+      // Crear puntos
+      slides.forEach((_, i) => {
+        const dot = document.createElement("div");
+        dot.style.width = "8px";
+        dot.style.height = "8px";
+        dot.style.borderRadius = "50%";
+        dot.style.background = i === 0 ? "#e50914" : "#777";
+        dot.style.cursor = "pointer";
+        dot.addEventListener("click", () => {
+          index = i;
+          update();
+          reset();
+        });
+        dotsBox.appendChild(dot);
+      });
+
+      const dots = dotsBox.querySelectorAll("div");
+
+      function update() {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, i) => (d.style.background = i === index ? "#e50914" : "#777"));
+      }
+
+      function next() { index = (index + 1) % slides.length; update(); }
+      function prev() { index = (index - 1 + slides.length) % slides.length; update(); }
+
+      nextBtn.addEventListener("click", () => { next(); reset(); });
+      prevBtn.addEventListener("click", () => { prev(); reset(); });
+
+      let timer = setInterval(next, 4000);
+      function reset() { clearInterval(timer); timer = setInterval(next, 4000); }
+
+      // Abrir modal al clickear imagen
+      article.querySelectorAll(".slide img").forEach(img => {
+        img.addEventListener("click", () => {
+          modalImg.src = img.src;
+          modal.style.display = "flex";
+        });
+      });
+
+      // Cerrar modal
+      closeBtn.addEventListener("click", () => modal.style.display = "none");
+      modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+    })();
+  </script>
+</article>
+
+
+    </div>
+    
+
+  </section>
+
+  <section id="contacto" class="container">
+    <div class="section-title"><h2>Contacto</h2><span class="muted">Consultanos directamente</span></div>
+    <div class="contact">
+      <div class="card" style="padding:18px;text-align:center;">
+        <p class="muted">Consultas, reservas y compras directamente por WhatsApp.</p>
+        <a class="button" id="btn-wa" href="#" target="_blank" rel="noopener">Abrir chat de WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="modal-wrap" class="modal-wrap">
+    <div class="modal card">
+      <header>
+        <div>
+          <div id="ttl" style="font-weight:900;font-size:20px">Título</div>
+          <div class="muted" id="priceLine"></div>
+        </div>
+        <button class="x" onclick="cerrarModal()">✕</button>
+      </header>
+      <div class="modal-body">
+        <div><img id="cover" src="" alt="Imagen del producto" /></div>
+        <div>
+          <div class="faq">
+            <details open>
+              <summary>¿Qué es?</summary><div id="q1" class="muted"></div>
+            </details>
+            <details><summary>¿Qué incluye?</summary><div id="q2" class="muted"></div></details>
+            <details><summary>¿Qué resultados puedo esperar?</summary><div id="q3" class="muted"></div></details>
+          </div>
+          <a id="comprar" class="button" href="#" target="_blank" rel="noopener">Agregar al carrito</a>
+          <button class="button secondary" onclick="cerrarModal()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © <span id="y"></span> Delirio Espiritual — Todos los derechos reservados.
+  </footer>
+
+  <script>
+  const WHATSAPP_NUMERO = "5491128764016";
+  const WHATSAPP_MSG = "Hola, quiero hacer una consulta sobre los cursos.";
+
+  const PRODUCTOS = [
+    {
+      id:"ebook",
+      titulo:"EBOOK — Guía hacia el Despertar Espiritual",
+      precio:12,
+      precioTachado:45,
+      enlaceCompra:"#",
+      imagen:"EBOOK-img.jpg",
+      queEs:"El Ebook Delirio Espiritual es una guía práctica y directa para empezar a despertar...",
+      queIncluye:"Incluye el Ebook completo en formato digital...",
+      resultados:"Vas a experimentar una mayor claridad mental..."
+    },
+    {
+      id:"gm-media",
+      titulo:"FORMACION — Formación Delirio Espiritual",
+      precio:45,
+      precioTachado:120,
+      enlaceCompra:"#",
+      imagen:"formacion-img.jpg",
+      queEs:"La Formación Delirio Espiritual es un proceso completo de transformación interior...",
+      queIncluye:"Incluye acceso completo al programa en video...",
+      resultados:"Una transformación real en tu percepción..."
+    },
+    {
+      id:"ASESORÍA",
+      titulo:"ASESORÍA 1 A 1 — con Valentino Sansalone",
+      precio:500,
+      precioTachado:1000,
+      enlaceCompra:"#",
+      imagen:"asesoria.png",
+      queEs:"La Asesoría Delirio Espiritual es un espacio personal conmigo donde trabajamos tu despertar...",
+      queIncluye:"Incluye sesiones personales conmigo, seguimiento individualizado...",
+      resultados:"Una reprogramación profunda de tu percepción..."
+    }
+  ];
+
+  const TESTIMONIOS = [
+    { video:"testimonio1.mp4" },
+    { video:"testimonio2.mp4" }
+  ];
+
+  const waLink = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MSG)}`;
+  document.getElementById("cta-whatsapp").href = waLink;
+  document.getElementById("btn-wa").href = waLink;
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  const grid = document.getElementById("grid");
+  const tgrid = document.getElementById("tgrid");
+
+  PRODUCTOS.forEach(p => {
+    const el = document.createElement("article");
+    el.className = "card prod";
+    el.innerHTML = `
+      <img src="${p.imagen}" alt="${p.titulo}">
+      <div class="body">
+        <h3>${p.titulo}</h3>
+        <div class="price">
+          <div class="now">$${p.precio}</div>
+          <div class="old">$${p.precioTachado}</div>
+        </div>
+        <button class="button" data-id="${p.id}">Ver más</button>
+      </div>`;
+    grid.appendChild(el);
+  });
+
+  TESTIMONIOS.forEach(t => {
+    const el = document.createElement("article");
+    el.className = "card t-card";
+    el.innerHTML = `<video src="${t.video}" controls preload="metadata" style="width:100%;height:auto;background:#000;border-radius:12px;"></video>`;
+    tgrid.appendChild(el);
+  });
+
+  const wrap = document.getElementById("modal-wrap"),
+        ttl = document.getElementById("ttl"),
+        priceLine = document.getElementById("priceLine"),
+        cover = document.getElementById("cover"),
+        q1 = document.getElementById("q1"),
+        q2 = document.getElementById("q2"),
+        q3 = document.getElementById("q3"),
+        comprar = document.getElementById("comprar");
+
+  function abrirModal(p) {
+    ttl.textContent = p.titulo;
+    priceLine.textContent = `$${p.precio} (antes $${p.precioTachado})`;
+    cover.src = p.imagen;
+    q1.textContent = p.queEs;
+    q2.textContent = p.queIncluye;
+    q3.textContent = p.resultados;
+    comprar.href = p.enlaceCompra;
+    wrap.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function cerrarModal() {
+    wrap.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  window.cerrarModal = cerrarModal;
+
+  grid.addEventListener("click", e => {
+    const btn = e.target.closest("button[data-id]");
+    if (!btn) return;
+    const p = PRODUCTOS.find(x => x.id === btn.dataset.id);
+    if (p) abrirModal(p);
+  });
+
+  wrap.addEventListener("click", e => {
+    if (e.target === wrap) cerrarModal();
+  });
+  </script>
+</body>
+</html>
